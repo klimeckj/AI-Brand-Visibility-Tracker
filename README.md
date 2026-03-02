@@ -1,5 +1,7 @@
 # AI Brand Visibility Tracker
 
+> **⚠️ Testing prototype** — The n8n workflow integration requires a locally running n8n instance and is not available in the deployed version. Queries sent via the form will fail to connect.
+
 A lightweight intelligence tool that continuously monitors how large language models represent a given brand in their responses — without any human bias in the evaluation loop.
 
 ---
@@ -203,3 +205,4 @@ The app will be available at `http://localhost:8501`.
 ├── requirements.txt  # Python dependencies
 └── README.md
 ```
+
