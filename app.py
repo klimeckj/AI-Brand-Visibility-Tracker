@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import json
 import io
 import csv
 import pandas as pd
@@ -14,14 +13,11 @@ st.set_page_config(
 
 # ── Config ────────────────────────────────────────────────────────────────────
 try:
-    with open("config.json", "r") as f:
-        config = json.load(f)
-except FileNotFoundError:
-    st.error("Please create a config.json file with your keys and webhook URL.")
+    N8N_WEBHOOK_URL = st.secrets["n8n_webhook_url"]
+    API_KEY = st.secrets["gemini_api_key"]
+except KeyError:
+    st.error("Missing secrets. Add n8n_webhook_url and gemini_api_key to .streamlit/secrets.toml (local) or Streamlit Cloud secrets.")
     st.stop()
-
-N8N_WEBHOOK_URL = config.get("n8n_webhook_url")
-API_KEY = config.get("gemini_api_key")
 
 # ── Session state ────────────────────────────────────────────────────────────
 if "results" not in st.session_state:
@@ -179,7 +175,7 @@ with tab_new:
             st.warning("Please enter a prompt.")
             st.stop()
         if not API_KEY or API_KEY == "YOUR_GEMINI_API_KEY_HERE":
-            st.error("Please add a valid Gemini API Key to your config.json.")
+            st.error("Please add a valid Gemini API Key to your Streamlit secrets.")
             st.stop()
 
         with st.spinner("Analyzing LLM response…"):
