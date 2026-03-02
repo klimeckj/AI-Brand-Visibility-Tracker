@@ -11,6 +11,14 @@ st.set_page_config(
     layout="wide",
 )
 
+# ── Prototype warning ──────────────────────────────────────────────────
+st.warning(
+    "⚠️ **This is a testing prototype.** "
+    "The n8n workflow integration requires a locally running n8n instance and is not available in this deployed version. "
+    "Queries sent via the form will fail to connect.",
+    icon=None,
+)
+
 # ── Config ────────────────────────────────────────────────────────────────────
 try:
     N8N_WEBHOOK_URL = st.secrets["n8n_webhook_url"]
@@ -330,3 +338,4 @@ with tab_trends:
             list(sentiment_counts.items()), columns=["Sentiment", "Count"]
         ).set_index("Sentiment")
         st.bar_chart(df_sentiment["Count"], use_container_width=True)
+
